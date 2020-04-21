@@ -20,6 +20,7 @@ client.callback()
 
 client.getToken().then((token) => {
     console.log(token)
+    return token;
 })
 
 let f = new Fetcher(client)
