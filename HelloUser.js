@@ -1,8 +1,8 @@
 const JSO = require('jso')
 const Fetcher = require('fetcher');
 
-const client_id = "PFGYiBD0QfWAzxeQ7ehd5lyGYW5yGNXv"
-const client_secret = "oUkEMAnGmLLGVQ8U"
+const client_id = "Too5BdPayTQACdw1AJK1rD4nKUD0Ag7J"
+const client_secret = "wi7sCuFSgQg34ZWO"
 
 let config = {
     client_id,
@@ -10,7 +10,6 @@ let config = {
     redirect_uri: 'https://nhsd-apim-testing-internal-dev.herokuapp.com/callback',
     authorization: 'https://internal-dev.api.service.nhs.uk/oauth2/authorize',
     token: "https://internal-dev.api.service.nhs.uk/oauth2/token",
-    scope: 'qwerty',
     response_type: 'code',
 }
 
