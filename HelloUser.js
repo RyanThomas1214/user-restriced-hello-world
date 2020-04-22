@@ -1,34 +1,24 @@
-const JSO = require('jso')
-const Fetcher = require('fetcher');
+const ClientOAuth2 = require('client-oauth2')
+const express = require('express')
+const app = express()
 
-const client_id = "Too5BdPayTQACdw1AJK1rD4nKUD0Ag7J"
-const client_secret = "wi7sCuFSgQg34ZWO"
+app.listen(9090)
 
-let config = {
-    client_id,
-    client_secret,
-    redirect_uri: 'https://nhsd-apim-testing-internal-dev.herokuapp.com/callback',
-    authorization: 'https://internal-dev.api.service.nhs.uk/oauth2/authorize',
-    token: "https://internal-dev.api.service.nhs.uk/oauth2/token",
+const clientId = "Too5BdPayTQACdw1AJK1rD4nKUD0Ag7J"
+const clientSecret = "wi7sCuFSgQg34ZWO"
+
+const client = new ClientOAuth2({
+    clientId,
+    clientSecret,
+    redirectUri: 'https://nhsd-apim-testing-internal-dev.herokuapp.com/callback',
+    authorizationUri: 'https://internal-dev.api.service.nhs.uk/oauth2/authorize',
+    accessTokenUri: "https://internal-dev.api.service.nhs.uk/oauth2/token",
     response_type: 'code',
-}
-
-let client = new JSO(config)
-
-client.callback()
-
-client.getToken().then((token) => {
-    console.log(token)
-    return token;
 })
 
-let f = new Fetcher(client)
-let url =  "https://internal-dev.api.service.nhs.uk/hello-world/hello/user" 
-f.fetch(url, {})
-	.then((data) => {
-		return data.json()
-	})
-	.then((data) => {
-		console.log(data)
-	})
+app.get('/login', (req,res) => {
+    var uri = client.code.getUri()
+    res.redirect(uri + 'hello')
+})
+    
 
