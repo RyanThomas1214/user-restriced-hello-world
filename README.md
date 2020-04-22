@@ -5,7 +5,7 @@ Clone this repo and run these commands:
 
 After the external dependencies are installed you can run the code using 
 
-> node snippet2.js
+> node HelloUser.js
 
 Once running go to http://localhost:9090/login and enter the NHS login details. This should return a page containing your access token.
 Use this token in the following command:
