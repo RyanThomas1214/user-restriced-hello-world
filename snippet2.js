@@ -27,19 +27,16 @@ app.get('/auth/callback', function (req, res) {
       .then(function (user) {
         console.log(user) 
    
-        // Refresh the current users access token.
         user.refresh().then(function (updatedUser) {
           console.log(updatedUser !== user) 
           console.log(updatedUser.accessToken)
         })
    
-        // Sign API requests on behalf of the current user.
         user.sign({
           method: 'get',
           url: 'https://internal-dev.api.service.nhs.uk/oauth2/authorize'
         })
    
-        // We should store the token into a database.
         return res.send(user.accessToken)
       })
   })
