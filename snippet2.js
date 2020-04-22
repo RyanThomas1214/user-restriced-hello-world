@@ -18,25 +18,29 @@ const client = new ClientOAuth2({
 
 app.get('/auth', (req,res) => {
     var uri = client.code.getUri()
- 
-  res.redirect(uri)
+    res.redirect(uri + 'hello')
 })
 
-app.get('/callback', function (req, res) {
+app.get('/auth/callback', function (req, res) {
+    console.log('hello')
     client.code.getToken(req.originalUrl)
       .then(function (user) {
         console.log(user) 
    
+        // Refresh the current users access token.
         user.refresh().then(function (updatedUser) {
           console.log(updatedUser !== user) 
           console.log(updatedUser.accessToken)
         })
    
+        // Sign API requests on behalf of the current user.
         user.sign({
           method: 'get',
           url: 'https://internal-dev.api.service.nhs.uk/oauth2/authorize'
         })
    
+        // We should store the token into a database.
         return res.send(user.accessToken)
       })
   })
+
