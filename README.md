@@ -1,6 +1,6 @@
 Clone this repo and run these commands:
 
-> npm i client-oauth2
+> npm i client-oauth2 express
 
 
 After the external dependencies are installed you can run the code using 
